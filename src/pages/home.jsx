@@ -3,7 +3,6 @@ import { useState } from "react";
 import config from "../lib/config";
 
 export default function Home() {
-  console.log(config);
   const values = {
     query: "",
   };
@@ -13,8 +12,6 @@ export default function Home() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(formData);
-
       const res = await axios.get(
         `https://api.tmdb.org/3/search/movie?query=${formData.query}&include_adult=false&language=en-US&page=1`,
         config,
@@ -24,8 +21,6 @@ export default function Home() {
         name: `${result?.title || result?.original_title} | ${result?.release_date?.split("-")[0]}`,
         value: result?.id,
       }));
-
-      console.log(choices);
 
       setMovies(choices);
 
