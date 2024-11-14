@@ -61,19 +61,19 @@ export default function Home() {
       <section>
         {movies.length > 0
           ? movies.map((movie) => (
-              <a
-                className="card"
-                key={movie?.value}
-                href={`https://vidsrc.icu/embed/movie/${movie?.value}`}
-                target="_blank"
-              >
+              <section className="card" key={movie?.value}>
                 <img
                   className="card-media"
                   src={`https://image.tmdb.org/t/p/w500/${movie?.poster}`}
                 />
                 <article className="card-body">
                   <article className="flex items-start justify-between">
-                    <p className="font-bold">{movie?.name}</p>
+                    <a
+                      href={`https://vidsrc.icu/embed/movie/${movie?.value}`}
+                      target="_blank"
+                    >
+                      <p className="font-bold">{movie?.name}</p>
+                    </a>
                     <article className="flex items-center gap-2">
                       {movie?.rating !== 0 && (
                         <p className="tag">{movie?.rating?.toFixed(1)}</p>
@@ -82,7 +82,7 @@ export default function Home() {
                     </article>
                   </article>
                 </article>
-              </a>
+              </section>
             ))
           : null}
       </section>
