@@ -18,13 +18,15 @@ export default function Home() {
         config,
       );
 
-      const choices = res.data.results.map((result) => ({
-        name: result?.title || result?.original_title,
-        release: result?.release_date || "",
-        poster: result?.backdrop_path || result?.poster_path,
-        rating: result?.vote_average || 0,
-        value: result?.id,
-      }));
+      const choices = res.data.results
+        .map((result) => ({
+          name: result?.title || result?.original_title,
+          release: result?.release_date || "",
+          poster: result?.backdrop_path || result?.poster_path,
+          rating: result?.vote_average || 0,
+          value: result?.id,
+        }))
+        .filter((choice) => choice.release !== "");
 
       setMovies(choices);
 
@@ -58,32 +60,30 @@ export default function Home() {
       </form>
       <section>
         {movies.length > 0
-          ? movies.map((movie) => {
-              return movie.release !== "" ? (
-                <a
-                  className="card"
-                  key={movie?.value}
-                  href={`https://vidsrc.icu/embed/movie/${movie?.value}`}
-                  target="_blank"
-                >
-                  <img
-                    className="card-media"
-                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster}`}
-                  />
-                  <article className="card-body">
-                    <article className="flex items-start justify-between">
-                      <p className="font-bold">{movie?.name}</p>
-                      <article className="flex items-center gap-2">
-                        {movie?.rating !== 0 && (
-                          <p className="tag">{movie?.rating?.toFixed(1)}</p>
-                        )}
-                        <p>{movie?.release?.split("-")[0]}</p>
-                      </article>
+          ? movies.map((movie) => (
+              <a
+                className="card"
+                key={movie?.value}
+                href={`https://vidsrc.icu/embed/movie/${movie?.value}`}
+                target="_blank"
+              >
+                <img
+                  className="card-media"
+                  src={`https://image.tmdb.org/t/p/w500/${movie?.poster}`}
+                />
+                <article className="card-body">
+                  <article className="flex items-start justify-between">
+                    <p className="font-bold">{movie?.name}</p>
+                    <article className="flex items-center gap-2">
+                      {movie?.rating !== 0 && (
+                        <p className="tag">{movie?.rating?.toFixed(1)}</p>
+                      )}
+                      <p>{movie?.release?.split("-")[0]}</p>
                     </article>
                   </article>
-                </a>
-              ) : null;
-            })
+                </article>
+              </a>
+            ))
           : null}
       </section>
     </section>
