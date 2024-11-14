@@ -62,10 +62,15 @@ export default function Home() {
         {movies.length > 0
           ? movies.map((movie) => (
               <section className="card" key={movie?.value}>
-                <img
-                  className="card-media"
-                  src={`https://image.tmdb.org/t/p/w500/${movie?.poster}`}
-                />
+                <a
+                  href={`https://vidsrc.icu/embed/movie/${movie?.value}`}
+                  target="_blank"
+                >
+                  <img
+                    className="card-media"
+                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster}`}
+                  />
+                </a>
                 <article className="card-body">
                   <article className="flex items-start justify-between">
                     <a
